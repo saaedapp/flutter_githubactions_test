@@ -47,6 +47,10 @@ jobs:
         - name: Build IPA
           run: flutter build ipa --no-codesign
 
+        - name: Compress Archives and IPAs
+          run: |
+            cd build
+            tar -czf ios_build.tar.gz ios
 
 
 

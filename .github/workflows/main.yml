@@ -7,12 +7,7 @@ on:
 jobs:
   flutter_test:
     name: Run flutter test and analyze
-    runs-on: ubuntu-latest
-
-    env:
-      DEV_FOLDER_ID: 1yBqKi4GlzgIH6xjMUvUD5eXzZep0gekY
-
-
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -42,26 +37,19 @@ jobs:
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
           echo "storeFile=keystore.jks" >> android/key.properties
-
       - name: Build APK
         run: flutter build apk --release
       - name: Build appBundle
         run: flutter build appbundle
 
-
-      - name: Rename APK with Date
+      - name: Build IPA
+        run: flutter build ipa --no-codesign
+      - name: Compress Archives and IPAs
         run: |
-          DATE=$(date +'%Y-%m-%d')
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-dev-release-$DATE.apk
-          echo "NEW_DEV_APK_NAME=app-dev-release-$DATE.apk" >> $GITHUB_ENV
+          cd build
+          tar -czf ios_build.tar.gz ios
 
-      - name: Upload Dev APK
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
-          filename: build/app/outputs/flutter-apk/${{ env.NEW_DEV_APK_NAME }}
-          folderId: ${{ env.DEV_FOLDER_ID }}
-          overwrite: true
+  
           
 
 #      - name: Upload Artifacts

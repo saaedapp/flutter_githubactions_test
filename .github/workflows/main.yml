@@ -47,29 +47,42 @@ jobs:
         run: |
           cd build
           tar -czf ios_build.tar.gz ios
+
+      - name: Rename APK with Date
+        run: |
+          DATE=$(date +'%Y-%m-%d')
+          mv app/build/outputs/apk/dev/release/app-dev-release.apk app/build/outputs/apk/dev/release/app-dev-release-$DATE.apk
+          echo "NEW_DEV_APK_NAME=app-dev-release-$DATE.apk" >> $GITHUB_ENV
+
+      - name: Upload Dev APK
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+          filename: app/build/outputs/apk/dev/release/${{ env.NEW_DEV_APK_NAME }}
+          overwrite: true
           
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@main
-        with:
-          name: Releases
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-            build/ios_build.tar.g
-            
-
-      - name: Extract version from pubspec.yaml
-        id: extract_version
-        run: >
-          version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
-
-          echo "VERSION=$version" >> $GITHUB_ENV
-          
-
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-            artifacts: build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz
-            tag: v${{ env.VERSION }}
-            token: ${{ secrets.TOKEN }}
+#      - name: Upload Artifacts
+#        uses: actions/upload-artifact@main
+#        with:
+#          name: Releases
+#          path: |
+#            build/app/outputs/flutter-apk/app-release.apk
+#            build/app/outputs/bundle/release/app-release.aab
+#            build/ios_build.tar.g
+#
+#
+#      - name: Extract version from pubspec.yaml
+#        id: extract_version
+#        run: >
+#          version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')
+#
+#          echo "VERSION=$version" >> $GITHUB_ENV
+#
+#
+#      - name: Create Release
+#        uses: ncipollo/release-action@v1
+#        with:
+#            artifacts: build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz
+#            tag: v${{ env.VERSION }}
+#            token: ${{ secrets.TOKEN }}

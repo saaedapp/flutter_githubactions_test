@@ -51,7 +51,7 @@ jobs:
       - name: Rename APK with Date
         run: |
           DATE=$(date +'%Y-%m-%d')
-          mv app/build/outputs/apk/dev/release/app-dev-release.apk app/build/outputs/apk/dev/release/app-dev-release-$DATE.apk
+          mv build/app/outputs/flutter-apk/app-release.apk app/build/outputs/apk/dev/release/app-dev-release-$DATE.apk
           echo "NEW_DEV_APK_NAME=app-dev-release-$DATE.apk" >> $GITHUB_ENV
 
       - name: Upload Dev APK

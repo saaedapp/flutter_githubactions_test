@@ -8,6 +8,11 @@ jobs:
   flutter_test:
     name: Run flutter test and analyze
     runs-on: ubuntu-latest
+
+    env:
+      DEV_FOLDER_ID: 1yBqKi4GlzgIH6xjMUvUD5eXzZep0gekY
+
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -55,6 +60,7 @@ jobs:
         with:
           credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
           filename: build/app/outputs/flutter-apk/${{ env.NEW_DEV_APK_NAME }}
+          folderId: ${{ env.DEV_FOLDER_ID }}
           overwrite: true
           
 

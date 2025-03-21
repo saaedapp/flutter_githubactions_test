@@ -57,6 +57,9 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo "PROVISIONING_PROFILE_BASE64" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/provisioning.mobileprovision
 
+      - name: run flutter clean
+        run: flutter clean
+
       - name: Install dependencies
         run: flutter pub get
 

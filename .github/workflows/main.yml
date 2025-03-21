@@ -61,7 +61,7 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS Release
-        run: flutter build ipa --release
+        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
 
       - name: Upload IPA to TestFlight
         env:

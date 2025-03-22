@@ -66,9 +66,20 @@ jobs:
       - name: Verify Installed Certificates
         run: security find-identity -v -p codesigning
 
+      - name: Pre-download Xcode dependencies
+        run: |
+         sudo xcodebuild -runFirstLaunch
+         sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+         xcodebuild -downloadAllPlatforms
 
       - name: Build iOS Release
-        run: flutter build ipa --release --verbose
+        run: flutter build ipa --release --no-codesign --verbose
+
+      - name: Manual Xcode Archive & Export
+        run: |
+              xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release archive -archivePath build/ios/Runner.xcarchive
+              xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive -exportOptionsPlist ios/ExportOptions.plist -exportPath build/ios/ipa
+
 
 
       - name: Upload IPA to TestFlight

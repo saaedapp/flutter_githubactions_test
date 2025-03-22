@@ -63,8 +63,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Verify Installed Certificates
+        run: security find-identity -v -p codesigning
+
+
       - name: Build iOS Release
-        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+        run: flutter build ipa --release --verbose
 
       - name: Upload IPA to TestFlight
         env:

@@ -70,6 +70,7 @@ jobs:
       - name: Build iOS Release
         run: flutter build ipa --release --verbose
 
+
       - name: Upload IPA to TestFlight
         env:
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}

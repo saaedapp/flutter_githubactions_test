@@ -7,7 +7,7 @@ on:
 jobs:
   flutter_test:
     name: Run flutter test and analyze
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -31,11 +31,37 @@ jobs:
 #          cd ..
           
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'  # Use a compatible Ruby version for Fastlane
+#      - name: Set up Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: '3.0'  # Use a compatible Ruby version for Fastlane
 
+      - name: Enable Automatic Signing in Xcode
+        run: |
+          mkdir -p ~/Library/Developer/Xcode/UserData/
+          echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+         <plist version=\"1.0\">
+          <dict>
+            <key>DisableAutomaticSigning</key>
+            <false/>
+          </dict>
+         </plist>" > ~/Library/Developer/Xcode/UserData/IDETemplateMacros.plist
+
+      - name: Configure Xcode Project for Automatic Signing
+        run: |
+          sudo gem install xcodeproj
+          ruby -e "
+            require 'xcodeproj';
+            project_path = 'ios/Runner.xcodeproj';
+            project = Xcodeproj::Project.open(project_path);
+            project.targets.each do |target|
+              target.build_configurations.each do |config|
+                config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+                config.build_settings['DEVELOPMENT_TEAM'] = '${{ secrets.APPLE_TEAM_ID }}'
+              end
+            end;
+            project.save;
+          "
 
       - name: Install Apple Certificate
         env:
@@ -73,12 +99,12 @@ jobs:
          xcodebuild -downloadAllPlatforms
 
       - name: Build iOS Release
-        run: flutter build ipa --release --no-codesign --verbose
+        run: flutter build ipa --release
 
-      - name: Manual Xcode Archive & Export
-        run: |
-              xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release archive -archivePath build/ios/Runner.xcarchive
-              xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive -exportOptionsPlist ios/ExportOptions.plist -exportPath build/ios/ipa
+#      - name: Manual Xcode Archive & Export
+#        run: |
+#              xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -sdk iphoneos -configuration Release archive -archivePath build/ios/Runner.xcarchive
+#              xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive -exportOptionsPlist ios/ExportOptions.plist -exportPath build/ios/ipa
 
 
 

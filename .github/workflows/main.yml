@@ -30,6 +30,25 @@ jobs:
             ruby-version: '3.0'
             bundler-cache: true
 
+      - name: Install CocoaPods
+        run: |
+             cd ios
+             pod install
+
       - name: Flutter Build iOS
         run: flutter build ios --release --no-codesign
 
+      - name: Install Apple Certificate
+        uses: apple-actions/import-codesign-certs@v1
+        with:
+           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
+           p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+
+
+      - name: Deploy to App Store
+        uses: apple-actions/upload-testflight@v1
+        with:
+            app-path: build/ios/ipa/*.ipa
+            api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+            api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
+            api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

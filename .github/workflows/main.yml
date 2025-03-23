@@ -46,7 +46,7 @@ jobs:
 
 
       - name: Deploy to App Store
-        uses: apple-actions/upload-testflight@v1
+        uses: apple-actions/upload-testflight@v2.323.0
         with:
             app-path: build/ios/ipa/Runner.ipa
             api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}

@@ -20,6 +20,23 @@ jobs:
           flutter-version: 3.22.0
           channel: stable
           architecture: x64
+
+
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+            ruby-version: '3.0'
+            bundler-cache: true
+
+      - name: Install CocoaPods
+        run: |
+             cd ios
+             pod install
+
       - name: Enable Automatic Signing in Xcode
         run: |
           mkdir -p ~/Library/Developer/Xcode/UserData/
@@ -51,25 +68,6 @@ jobs:
         with:
           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
           p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-            ruby-version: '3.0'
-            bundler-cache: true
-
-      - name: Install CocoaPods
-        run: |
-             cd ios
-             pod install
-
-      - name: Flutter Build iOS
-        run: flutter build ios --release --no-codesign
-
       - name: Build iOS IPA
         run: |
               cd ios

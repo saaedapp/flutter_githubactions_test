@@ -21,7 +21,15 @@ jobs:
           channel: stable
           architecture: x64
 
+      - name: remove existing podfile
+        run: |
+          cd ios
+          rm -rf Pods Podfile.lock
+          pod cache clean --all
+          
 
+      - name: flutter clean
+        run: flutter clean
 
       - name: Install Dependencies
         run: flutter pub get

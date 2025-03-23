@@ -108,4 +108,4 @@ jobs:
             app-path:  "ios/build/ios/ipa/Runner.ipa"
             api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
             api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
-            api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+            issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

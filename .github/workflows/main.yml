@@ -20,6 +20,38 @@ jobs:
           flutter-version: 3.22.0
           channel: stable
           architecture: x64
+      - name: Enable Automatic Signing in Xcode
+        run: |
+          mkdir -p ~/Library/Developer/Xcode/UserData/
+          echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+          <plist version=\"1.0\">
+          <dict>
+            <key>DisableAutomaticSigning</key>
+            <false/>
+           </dict>
+          </plist>" > ~/Library/Developer/Xcode/UserData/IDETemplateMacros.plist
+
+      - name: Configure Xcode Project for Automatic Signing
+        run: |
+          sudo gem install xcodeproj
+          ruby -e "
+            require 'xcodeproj';
+            project_path = 'ios/Runner.xcodeproj';
+            project = Xcodeproj::Project.open(project_path);
+            project.targets.each do |target|
+              target.build_configurations.each do |config|
+                config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+                config.build_settings['DEVELOPMENT_TEAM'] = '${{ secrets.APPLE_TEAM_ID }}'
+              end
+            end;
+            project.save;
+          "
+      - name: Install Apple Certificate
+        uses: apple-actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
+          p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+
 
       - name: Install Dependencies
         run: flutter pub get
@@ -43,12 +75,6 @@ jobs:
               cd ios
               xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release archive -archivePath build/Runner.xcarchive
               xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath build/ios/ipa
-
-      - name: Install Apple Certificate
-        uses: apple-actions/import-codesign-certs@v3
-        with:
-           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
-           p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
 
 
       - name: Deploy to App Store

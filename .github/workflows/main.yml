@@ -93,13 +93,7 @@ jobs:
 
 
       - name: Build iOS app
-        run: |
-           xcodebuild -workspace ios/Runner.xcworkspace \
-           -scheme Runner \
-           -configuration Release \
-           -sdk iphoneos \
-           -destination 'generic/platform=iOS' \
-           clean archive -archivePath ios/build/Runner.xcarchive
+        run: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
 
       - name: Deploy to App Store
         uses: apple-actions/upload-testflight-build@v1

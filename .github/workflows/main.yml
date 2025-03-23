@@ -84,12 +84,14 @@ jobs:
           echo "$PROVISIONING_PROFILE_BASE64" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/provisioning.mobileprovision
 
 
-      - name: Build iOS IPA
+      - name: Build iOS app
         run: |
-              cd ios
-              xcodebuild -workspace Runner.xcworkspace -scheme Runner -configuration Release archive -archivePath build/Runner.xcarchive
-              xcodebuild -exportArchive -archivePath build/Runner.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath build/ios/ipa
-
+           xcodebuild -workspace ios/Runner.xcworkspace \
+           -scheme Runner \
+           -configuration Release \
+           -sdk iphoneos \
+           -destination 'generic/platform=iOS' \
+           clean archive -archivePath ios/build/Runner.xcarchive
 
       - name: Deploy to App Store
         uses: apple-actions/upload-testflight-build@v1

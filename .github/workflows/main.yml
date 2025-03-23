@@ -50,11 +50,11 @@ jobs:
 
       - name: Configure Xcode Project for Automatic Signing
         run: |
-          sudo gem install xcodeproj
+          sudo gem install xcworkspace
           ruby -e "
-            require 'xcodeproj';
-            project_path = 'ios/Runner.xcodeproj';
-            project = Xcodeproj::Project.open(project_path);
+            require 'xcworkspace';
+            project_path = 'ios/Runner.xcworkspace';
+            project = Xcworkspace::Project.open(project_path);
             project.targets.each do |target|
               target.build_configurations.each do |config|
                 config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
@@ -68,6 +68,8 @@ jobs:
         with:
           p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
           p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+
+
       - name: Build iOS IPA
         run: |
               cd ios

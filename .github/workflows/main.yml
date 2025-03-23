@@ -105,7 +105,7 @@ jobs:
       - name: Deploy to App Store
         uses: apple-actions/upload-testflight-build@v1
         with:
-            app-path:  "ios/build/ios/ipa/Runner.ipa"
+            app-path:  "build/ios/archive/Runner.xcarchive"
             api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
             api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
             issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

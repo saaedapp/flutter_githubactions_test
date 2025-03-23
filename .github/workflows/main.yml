@@ -39,16 +39,16 @@ jobs:
         run: flutter build ios --release --no-codesign
 
       - name: Install Apple Certificate
-        uses: apple-actions/import-codesign-certs@v2
+        uses: apple-actions/import-codesign-certs@v3
         with:
            p12-file-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
            p12-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
 
 
       - name: Deploy to App Store
-        uses: apple-actions/upload-testflight@v2
+        uses: apple-actions/upload-testflight@v1
         with:
-            app-path: "ios/build/ios/ipa/Runner.ipa"
+            app-path: build/ios/ipa/*.ipa
             api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
             api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
             api-key-issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

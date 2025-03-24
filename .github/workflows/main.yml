@@ -6,6 +6,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+
+    env:
+      DEV_FOLDER_ID: 1yBqKi4GlzgIH6xjMUvUD5eXzZep0gekY
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -55,11 +59,20 @@ jobs:
         run: zip -qq -r -9 FlutterIpaExport.ipa Payload
         working-directory: build/ios/iphoneos
 
+
+      - name: Upload Dev APK
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+          filename: build/ios/iphoneos/FlutterIpaExport.ipa
+          folderId: ${{ env.DEV_FOLDER_ID }}
+          overwrite: true
+
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.TOKEN }}
-          file: build/ios/iphoneos/*.ipa
+          file: build/ios/iphoneos/FlutterIpaExport.ipa
           tag: v1.0
           overwrite: true
           body: "This is first release"

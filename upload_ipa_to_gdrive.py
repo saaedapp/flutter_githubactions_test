@@ -5,13 +5,14 @@ from google.oauth2 import service_account
 
 # Load Google Drive API credentials
 SCOPES = ["https://www.googleapis.com/auth/drive.file"]
-SERVICE_ACCOUNT_FILE = creds.json
+SERVICE_ACCOUNT_FILE = "creds.json"
 
-print(f"++>>>>creds.json: {SERVICE_ACCOUNT_FILE} ++>>>")
+
 
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES
 )
+print(f"++>>>>creds.json: {credentials} ++>>>")
 drive_service = build("drive", "v3", credentials=credentials)
 
 # Get the IPA file path from environment variables

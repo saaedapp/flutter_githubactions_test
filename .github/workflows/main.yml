@@ -60,13 +60,13 @@ jobs:
         working-directory: build/ios/iphoneos
 
 
-      - name: Upload Dev APK
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
-          filename: build/ios/iphoneos/FlutterIpaExport.ipa
-          folderId: ${{ env.DEV_FOLDER_ID }}
-          overwrite: true
+#      - name: Upload Dev APK
+#        uses: adityak74/google-drive-upload-git-action@main
+#        with:
+#          credentials: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+#          filename: build/ios/iphoneos/FlutterIpaExport.ipa
+#          folderId: ${{ env.DEV_FOLDER_ID }}
+#          overwrite: true
 
       - name: Find IPA File
         id: find-ipa

@@ -102,10 +102,16 @@ jobs:
             provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
             keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
 
-      - name: Deploy to App Store
-        uses: apple-actions/upload-testflight-build@v1
+
+      - name: Upload IPA to GitHub Actions
+        uses: actions/upload-artifact@v3
         with:
-            app-path:  "build/ios/archive/Runner.xcarchive"
-            api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-            api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
-            issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          name: iOS-Release-IPA
+          path: build/ios/ipa/*.ipa
+#      - name: Deploy to App Store
+#        uses: apple-actions/upload-testflight-build@v1
+#        with:
+#            app-path:  "build/ios/archive/Runner.xcarchive"
+#            api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+#            api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
+#            issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

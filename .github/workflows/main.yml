@@ -104,7 +104,7 @@ jobs:
 
 
       - name: Upload IPA to GitHub Actions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: iOS-Release-IPA
           path: build/ios/ipa/*.ipa

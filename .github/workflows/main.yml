@@ -84,7 +84,8 @@ jobs:
         run: pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 
       - name: Create Credentials File
-        run: echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > creds.json
+        run: echo '${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}' | base64 --decode > creds.json
+
 
       - name: Upload IPA to Google Drive
         run: python upload_ipa_to_gdrive.py

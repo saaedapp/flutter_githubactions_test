@@ -68,11 +68,31 @@ jobs:
           folderId: ${{ env.DEV_FOLDER_ID }}
           overwrite: true
 
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+      - name: Find IPA File
+        id: find-ipa
+        run: |
+          IPA_PATH=$(find build/ios/iphoneos/ -name "*.ipa" | head -n 1)
+          echo "IPA_PATH=$IPA_PATH" >> $GITHUB_ENV
+          echo "IPA file found: $IPA_PATH"
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          repo_token: ${{ secrets.TOKEN }}
-          file: build/ios/iphoneos/FlutterIpaExport.ipa
-          tag: v1.0
-          overwrite: true
-          body: "This is first release"
+          python-version: '3.x'
+
+      - name: Install Google Drive API Dependencies
+        run: pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
+      - name: Create Credentials File
+        run: echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}" > creds.json
+
+      - name: Upload IPA to Google Drive
+        run: python upload_ipa_to_gdrive.py
+#      - name: Upload binaries to release
+#        uses: svenstaro/upload-release-action@v2
+#        with:
+#          repo_token: ${{ secrets.TOKEN }}
+#          file: build/ios/iphoneos/FlutterIpaExport.ipa
+#          tag: v1.0
+#          overwrite: true
+#          body: "This is first release"

@@ -1,19 +1,31 @@
 # Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+
 
 trigger:
-- main
+  branches:
+    include:
+      - main  # Change this to your main branch name
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'  # You can also use 'windows-latest' or 'macos-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - task: UseFlutter@1
+    inputs:
+      version: 'latest'  # You can specify a specific version like '3.13.0'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: flutter doctor
+    displayName: 'Check Flutter Environment'
+
+  - script: flutter pub get
+    displayName: 'Install Dependencies'
+
+  - script: flutter build apk --release
+    displayName: 'Build Android APK'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Upload APK to Artifacts'
+    inputs:
+      pathToPublish: 'build/app/outputs/flutter-apk/app-release.apk'
+      artifactName: 'android-apk'

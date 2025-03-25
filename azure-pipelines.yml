@@ -6,7 +6,7 @@ trigger:
   - main  # Change this to your main branch name
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use 'windows-latest' if needed
+  name: 'Development'
 
 steps:
   - task: FlutterInstall@0

@@ -8,15 +8,18 @@ trigger:
       - main  # Change this to your main branch name
 
 pool:
-  vmImage: 'ubuntu-latest'  # You can also use 'windows-latest' or 'macos-latest'
+  vmImage: 'ubuntu-latest'  # Use 'windows-latest' if needed
 
 steps:
-  - task: UseFlutter@1
-    inputs:
-      version: 'latest'  # You can specify a specific version like '3.13.0'
-
-  - script: flutter doctor
-    displayName: 'Check Flutter Environment'
+  - script: |
+      sudo apt-get update -qq
+      sudo apt-get install -y curl unzip xz-utils
+      curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.0-stable.tar.xz
+      tar -xf flutter_linux_3.13.0-stable.tar.xz
+      echo "##vso[task.setvariable variable=FLUTTER_HOME]$(pwd)/flutter"
+      echo "##vso[task.setvariable variable=PATH]$(FLUTTER_HOME)/bin:$(PATH)"
+      flutter doctor
+    displayName: 'Install Flutter'
 
   - script: flutter pub get
     displayName: 'Install Dependencies'

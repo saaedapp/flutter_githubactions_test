@@ -2,22 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>method</key>
-    <string>app-store</string>
-    <key>signingStyle</key>
-    <string>automatic</string>
-    <key>stripSwiftSymbols</key>
-    <true/>
-    <key>uploadBitcode</key>
-    <false/>
-    <key>uploadSymbols</key>
-    <true/>
-    <key>teamID</key>
-    <string>2WUMZJWXX8</string>
-    <key>provisioningProfiles</key>
-    <dict>
-        <key>com.example.flutterGithubactionsTest</key>
-        <string>iOS Team Provisioning Profile: com.example.flutterGithubactionsTest</string>
-    </dict>
+	<key>destination</key>
+	<string>export</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<true/>
+	<key>method</key>
+	<string>app-store-connect</string>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>5DDBUZY9CW</string>
+	<key>uploadSymbols</key>
+	<true/>
 </dict>
 </plist>

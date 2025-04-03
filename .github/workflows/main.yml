@@ -84,25 +84,25 @@ jobs:
           security set-keychain-settings -lut 21600
           security unlock-keychain -p "" ~/Library/Keychains/build.keychain
 
-      - name: Build iOS App
-        run: |
-          xcodebuild -workspace ios/Runner.xcworkspace \
-          -scheme Runner \
-          -sdk iphoneos \
-          -configuration Release \
-          -allowProvisioningUpdates
+#      - name: Build iOS App
+#        run: |
+#          xcodebuild -workspace ios/Runner.xcworkspace \
+#          -scheme Runner \
+#          -sdk iphoneos \
+#          -configuration Release \
+#          -allowProvisioningUpdates
      
      
 
-#      - name: Build iOS app
-#        uses: cedvdb/action-flutter-build-ios@v1
-#        with:
-#          # always use --export-options-plist=ios/GithubActionsExportOptions.plist
-#          build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
-#          certificate-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
-#          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+      - name: Build iOS app
+        uses: cedvdb/action-flutter-build-ios@v1
+        with:
+          # always use --export-options-plist=ios/GithubActionsExportOptions.plist
+          build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          certificate-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
+          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
 #          provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
-#          keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
+          keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
 
 
 

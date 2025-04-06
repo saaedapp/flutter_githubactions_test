@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-const String currentBranch = String.fromEnvironment('BRANCH');
+const String currentBranch = String.fromEnvironment('GIT_BRANCH');
 
 void main() {
   print("=-=-=->>>> currentBranch-- $currentBranch");

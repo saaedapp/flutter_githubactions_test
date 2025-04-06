@@ -13,6 +13,10 @@ jobs:
       #        with:
       #          distribution: oracle
       #          java-version: "17"
+      - name: Recreate app_colors.dart from secret
+        run: |
+          echo "${{ secrets.APP_COLORS_PRODUCTION }}" | base64 --decode > lib/app_colors.dart
+
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:

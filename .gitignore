@@ -15,7 +15,7 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-lib/app_colors.dart
+
 
 
 # The .vscode folder contains launch configuration and tasks you configure in
@@ -32,6 +32,7 @@ lib/app_colors.dart
 .pub-cache/
 .pub/
 /build/
+/lib/app_colors.dart
 
 # Symbolication related
 app.*.symbols

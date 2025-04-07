@@ -96,7 +96,7 @@ jobs:
             flutter build ipa \
               --build-name=1.0.11 \
               --build-number=21 \
-              --flavor=$BRANCH_NAME \
+              --flavor $BRANCH_NAME \
               --release \
               --export-options-plist=ios/ExportOptions.plist \
               --dart-define=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)

@@ -10,7 +10,6 @@ class F {
   static late final Flavor appFlavor;
 
   static String get name => appFlavor.name;
-
   static Color get backgroundColor{
     switch (appFlavor) {
       case Flavor.testing:
@@ -21,7 +20,6 @@ class F {
         return Colors.green;
     }
   }
-
   static String get title {
     switch (appFlavor) {
       case Flavor.testing:

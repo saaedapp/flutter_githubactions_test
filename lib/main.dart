@@ -10,6 +10,7 @@ void main() {
   F.appFlavor = Flavor.values.firstWhere(
     (element) => element.name == appFlavor,
   );
+  print('object ===>> ${F.appFlavor}');
 
   runApp(const App());
 }

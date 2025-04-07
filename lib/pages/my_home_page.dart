@@ -18,17 +18,24 @@ class MyHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              decoration: const BoxDecoration(
-                color: Colors.white
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('Hello from flavor: ${F.appFlavor}'),
-                  Text('Hello from config : ${backgroundColor}'),
-                  const Text('Hello from current branch : $gitBranch'),
-                ],
+              color: backgroundColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Hello from flavor: ${F.appFlavor}'),
+                      Text('Hello from config : ${backgroundColor}'),
+                      const Text('Hello from current branch : $gitBranch'),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

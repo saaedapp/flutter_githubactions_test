@@ -28,8 +28,13 @@ jobs:
         run: |
           echo "${{ secrets.APP_COLORS_TEST }}" | base64 --decode > lib/app_colors.dart
       
-      
-      
+      - name: Extract branch name
+        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+
+      - name: Print BRANCH_NAME
+        run: |
+          echo "Branch name is: $BRANCH_NAME"
 
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
@@ -87,18 +92,34 @@ jobs:
         uses: cedvdb/action-flutter-build-ios@v1
         with:
           # always use --export-options-plist=ios/GithubActionsExportOptions.plist
-          build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          build-cmd: |
+            flutter build ipa \
+              --build-name=1.0.11 \
+              --build-number=20 \
+              --flavor=$BRANCH_NAME \
+              --release \
+              --export-options-plist=ios/ExportOptions.plist \
+              --dart-define=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
           certificate-base64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
           keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
 
+      - name: List generated IPA files
+        run: ls -l build/ios/ipa/
 
+      - name: Find .ipa file
+        id: find_ipa
+        run: |
+          IPA_PATH=$(find build/ios/ipa/ -name "*.ipa" | head -n 1)
+          echo "Found IPA at: $IPA_PATH"
+          echo "ipa-path=$IPA_PATH" >> $GITHUB_OUTPUT
 
       - name: Deploy to App Store
         uses: apple-actions/upload-testflight-build@v1
         with:
-            app-path:  "build/ios/ipa/flutter_githubactions_test.ipa"
+            app-path:  ${{ steps.find_ipa.outputs.ipa-path }}
             api-key-id: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
             api-private-key: ${{ secrets.APP_STORE_CONNECT_KEY }}
             issuer-id: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

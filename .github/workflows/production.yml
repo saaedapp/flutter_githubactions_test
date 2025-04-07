@@ -112,7 +112,7 @@ jobs:
       - name: Find .ipa file
         id: find_ipa
         run: |
-          IPA_PATH=$(find build/ios/ipa/ -name "*.ipa" | head -n 1)
+          IPA_PATH=$(find build/ios/ipa -name "*.ipa" | head -n 1)
           echo "Found IPA at: $IPA_PATH"
           echo "ipa-path=$IPA_PATH" >> $GITHUB_OUTPUT
 

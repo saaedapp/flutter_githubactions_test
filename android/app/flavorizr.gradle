@@ -2,7 +2,7 @@ android {
     flavorDimensions += "flavor-type"
 
     productFlavors {
-        test {
+        testing {
             dimension "flavor-type"
             applicationId "com.example.flutter_githubactions_test"
             resValue "string", "app_name", "Apple test"

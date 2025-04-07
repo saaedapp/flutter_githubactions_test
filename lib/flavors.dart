@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum Flavor {
-  test,
+  testing,
   staging,
   production,
 }
@@ -11,9 +11,9 @@ class F {
 
   static String get name => appFlavor.name;
 
-  static Color get backgroundColor {
+  static Color get backgroundColor{
     switch (appFlavor) {
-      case Flavor.test:
+      case Flavor.testing:
         return Colors.red;
       case Flavor.staging:
         return Colors.blue;
@@ -24,7 +24,7 @@ class F {
 
   static String get title {
     switch (appFlavor) {
-      case Flavor.test:
+      case Flavor.testing:
         return 'Apple test';
       case Flavor.staging:
         return 'Apple staging';

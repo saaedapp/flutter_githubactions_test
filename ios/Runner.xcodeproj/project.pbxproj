@@ -422,7 +422,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D0A223052855361DAEF8269 /* stagingDebug.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Debug-staging";
 		};
@@ -769,7 +772,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3CCB63604B807C01A60E72DC /* testDebug.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Debug-test";
 		};
@@ -777,7 +783,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C28D2812C4C62B4AEF86433 /* testRelease.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Release-test";
 		};
@@ -785,7 +794,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FF0845270320133152C8C90F /* productionRelease.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Release-production";
 		};
@@ -863,6 +875,69 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug-staging";
+		};
+		55C27F6C2DA3BF3B00A59B90 /* Debug-test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Debug-test";
+		};
+		55C27F6D2DA3BF3B00A59B90 /* Profile-test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Profile-test";
+		};
+		55C27F6E2DA3BF3B00A59B90 /* Release-test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Release-test";
+		};
+		55C27F6F2DA3BF3B00A59B90 /* Debug-staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Debug-staging";
+		};
+		55C27F702DA3BF3B00A59B90 /* Profile-staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Profile-staging";
+		};
+		55C27F712DA3BF3B00A59B90 /* Release-staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Release-staging";
+		};
+		55C27F722DA3BF3B00A59B90 /* Debug-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Debug-production";
+		};
+		55C27F732DA3BF3B00A59B90 /* Profile-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Profile-production";
+		};
+		55C27F742DA3BF3B00A59B90 /* Release-production */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = RunnerTests;
+			};
+			name = "Release-production";
 		};
 		59FD3D1269EFB6A7F1F117C0 /* Debug-test */ = {
 			isa = XCBuildConfiguration;
@@ -1090,7 +1165,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72DBADB27556075CD3770769 /* productionDebug.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Debug-production";
 		};
@@ -1266,7 +1344,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46496DB3DB8A7613D982133D /* stagingRelease.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Release-staging";
 		};
@@ -1274,7 +1355,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B0CB971B25C5606B2DD5D88 /* productionProfile.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Profile-production";
 		};
@@ -1282,7 +1366,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D158F58CF5283D727DA7F25A /* stagingProfile.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Profile-staging";
 		};
@@ -1360,7 +1447,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9E0A3A77855DA66551177892 /* testProfile.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5DDBUZY9CW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = GithubActionsDemoAppTestAgain;
 			};
 			name = "Profile-test";
 		};
@@ -1445,6 +1535,15 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
+				55C27F6C2DA3BF3B00A59B90 /* Debug-test */,
+				55C27F6D2DA3BF3B00A59B90 /* Profile-test */,
+				55C27F6E2DA3BF3B00A59B90 /* Release-test */,
+				55C27F6F2DA3BF3B00A59B90 /* Debug-staging */,
+				55C27F702DA3BF3B00A59B90 /* Profile-staging */,
+				55C27F712DA3BF3B00A59B90 /* Release-staging */,
+				55C27F722DA3BF3B00A59B90 /* Debug-production */,
+				55C27F732DA3BF3B00A59B90 /* Profile-production */,
+				55C27F742DA3BF3B00A59B90 /* Release-production */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

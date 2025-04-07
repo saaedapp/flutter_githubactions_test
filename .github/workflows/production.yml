@@ -94,8 +94,8 @@ jobs:
           # always use --export-options-plist=ios/GithubActionsExportOptions.plist
           build-cmd: |
             flutter build ipa \
-              --build-name=1.0.1+1 \
-              --build-number=19 \
+              --build-name=1.0.11 \
+              --build-number=20 \
               --flavor=$BRANCH_NAME \
               --release \
               --export-options-plist=ios/ExportOptions.plist \

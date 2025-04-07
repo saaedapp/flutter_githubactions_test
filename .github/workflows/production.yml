@@ -95,7 +95,7 @@ jobs:
           build-cmd: |
             flutter build ipa \
               --build-name=1.0.11 \
-              --build-number=20 \
+              --build-number=21 \
               --flavor=$BRANCH_NAME \
               --release \
               --export-options-plist=ios/ExportOptions.plist \

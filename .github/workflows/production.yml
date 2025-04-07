@@ -95,7 +95,8 @@ jobs:
           provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
           keychain-password: ${{ secrets.IOS_GITHUB_KEYCHAIN_PASSWORD }}
 
-
+      - name: List generated IPA files
+        run: ls -l build/ios/ipa/
 
       - name: Deploy to App Store
         uses: apple-actions/upload-testflight-build@v1

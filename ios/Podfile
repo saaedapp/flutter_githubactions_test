@@ -4,9 +4,15 @@ platform :ios, '12.0' # Set your minimum iOS version
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
-  'Debug' => :debug,
-  'Profile' => :release,
-  'Release' => :release,
+  'Debug-testing' => :debug,
+  'Profile-testing' => :release,
+  'Release-testing' => :release,
+  'Debug-staging' => :debug,
+  'Profile-staging' => :release,
+  'Release-staging' => :release,
+  'Debug-production' => :debug,
+  'Profile-production' => :release,
+  'Release-production' => :release,
 }
 
 def flutter_root

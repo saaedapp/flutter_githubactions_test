@@ -1,0 +1,21 @@
+android {
+    flavorDimensions += "flavor-type"
+
+    productFlavors {
+        testing {
+            dimension "flavor-type"
+            applicationId "com.example.flutter_githubactions_test"
+            resValue "string", "app_name", "Apple test"
+        }
+        staging {
+            dimension "flavor-type"
+            applicationId "com.example.flutter_githubactions_test"
+            resValue "string", "app_name", "Apple staging"
+        }
+        production {
+            dimension "flavor-type"
+            applicationId "com.example.flutter_githubactions_test"
+            resValue "string", "app_name", "Apple"
+        }
+    }
+}
